@@ -9,6 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.api.veiculo.dto.VeiculoDTO;
+import com.api.veiculo.dto.VeiculoSomatorioDecadaDTO;
+import com.api.veiculo.dto.VeiculoSomatorioMarcaDTO;
+import com.api.veiculo.dto.VeiculoSomatorioSemanaDTO;
 import com.api.veiculo.entity.Veiculo;
 import com.api.veiculo.repository.VeiculoRepository;
 import com.api.veiculo.service.exception.ObjectNotFoundException;
@@ -58,4 +61,18 @@ public class VeiculoService {
 		}
 	}
 
+	// Somatório de veiculos por década
+	public List<VeiculoSomatorioDecadaDTO> countVeiculo() {
+		return veiculoRepository.somatorioVeiculo();
+	}
+	
+	// Somatório de veiculos por marca
+	public List<VeiculoSomatorioMarcaDTO> countMarca() {
+		return veiculoRepository.somatorioMarca();
+	}
+	
+	// Somatorio de veiculos cadastradas na ultima semana
+	public List<VeiculoSomatorioSemanaDTO> countSemana() {
+		return veiculoRepository.somatorioSemana(LocalDateTime.now().minusWeeks(1));
+	}
 }

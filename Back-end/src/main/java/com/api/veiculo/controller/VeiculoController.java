@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.api.veiculo.dto.VeiculoDTO;
+import com.api.veiculo.dto.VeiculoSomatorioDecadaDTO;
+import com.api.veiculo.dto.VeiculoSomatorioMarcaDTO;
+import com.api.veiculo.dto.VeiculoSomatorioSemanaDTO;
 import com.api.veiculo.entity.Veiculo;
 import com.api.veiculo.service.VeiculoService;
 
@@ -63,5 +66,26 @@ public class VeiculoController {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		veiculoService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	// Somatório de veiculos por décadas
+	@GetMapping("/decadas")
+	public ResponseEntity<List<VeiculoSomatorioDecadaDTO>> countVeiculo() {
+		List<VeiculoSomatorioDecadaDTO> veiculosDTO = veiculoService.countVeiculo();
+		return ResponseEntity.ok().body(veiculosDTO);
+	}
+	
+	// Somatório de veiculos por marca
+	@GetMapping("/marcas")
+	public ResponseEntity<List<VeiculoSomatorioMarcaDTO>> countMarca() {
+		List<VeiculoSomatorioMarcaDTO> veiculosDTO = veiculoService.countMarca();
+		return ResponseEntity.ok().body(veiculosDTO);
+	}
+	
+	//Retorna somatorio da semana
+	@GetMapping("/semanas")
+	public ResponseEntity<List<VeiculoSomatorioSemanaDTO>> countSemana(){
+		List<VeiculoSomatorioSemanaDTO> veiculosDTO = veiculoService.countSemana();
+		return ResponseEntity.ok().body(veiculosDTO);
 	}
 }
