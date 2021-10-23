@@ -1,4 +1,4 @@
-package com.api.veiculo.entities;
+package com.api.veiculo.entity;
 
 import java.time.LocalDateTime;
 
