@@ -30,11 +30,20 @@ public class VeiculoService {
 				.orElseThrow(() -> new ObjectNotFoundException("Não exite veiculo com id = " + id + "."));
 	}
 	
-	// inserir veiculo
+	// Inserir veiculo
 	public Veiculo insert(VeiculoDTO veiculoDTO) {
 		Veiculo veiculo = new Veiculo();
 		BeanUtils.copyProperties(veiculoDTO, veiculo);
 		veiculo.setCreated(LocalDateTime.now());
 		return veiculoRepository.save(veiculo);
+	}
+	
+	// Alterar veiculo
+	public Veiculo update(VeiculoDTO veiculoDTO, Long id) {
+		Veiculo newVeiculo = find(id);
+		BeanUtils.copyProperties(veiculoDTO, newVeiculo);
+		newVeiculo.setId(id);
+		newVeiculo.setUpdated(LocalDateTime.now());
+		return veiculoRepository.save(newVeiculo);
 	}
 }
