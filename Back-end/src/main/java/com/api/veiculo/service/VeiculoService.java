@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.api.veiculo.dto.VeiculoDTO;
@@ -46,4 +47,15 @@ public class VeiculoService {
 		newVeiculo.setUpdated(LocalDateTime.now());
 		return veiculoRepository.save(newVeiculo);
 	}
+	
+	// Excluir veiculo
+	public void delete(Long id) {
+		find(id);
+		try {
+			veiculoRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("Não pode excluir veiculos com associações.");
+		}
+	}
+
 }
