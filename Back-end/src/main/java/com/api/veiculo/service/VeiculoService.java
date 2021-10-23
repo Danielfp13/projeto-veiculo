@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.api.veiculo.entity.Veiculo;
 import com.api.veiculo.repository.VeiculoRepository;
+import com.api.veiculo.service.exception.ObjectNotFoundException;
+
 
 @Service
 public class VeiculoService {
@@ -19,4 +21,9 @@ public class VeiculoService {
 		return veiculoRepository.findAll();
 	}
 	
+	// Buscar veiculo por id
+	public Veiculo find(Long id) {
+		return veiculoRepository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("Não exite veiculo com id = " + id + "."));
+	}
 }
