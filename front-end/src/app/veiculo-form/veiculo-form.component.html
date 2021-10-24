@@ -8,7 +8,7 @@
     <mat-card class="half-width">
       <mat-card-title>
         <mat-icon><span class="material-icons">
-            airplanemode_active
+            drive_eta
           </span></mat-icon>
         Novo veículo
       </mat-card-title>
@@ -94,29 +94,34 @@
   <mat-tab label="Relatórios">
     <mat-card>
       <mat-card-title>
+        <mat-icon><span class="material-icons">
+            drive_eta
+          </span></mat-icon>
         Relatórios
       </mat-card-title>
-      <h1>Veículos por décadas:</h1>
-      <div *ngFor="let item of somatorioDecadas">
-        <label>Década de {{item.decada}}: {{item.quantidade}} veículos.</label>
-      </div>
+      <mat-card-content>
+        <h1>Veículos por décadas:</h1>
+        <div *ngFor="let item of somatorioDecadas">
+          <label>Década de {{item.decada}}: {{item.quantidade}} veículos.</label>
+        </div>
 
-      <h1>Veículos por marcas:</h1>
-      <div *ngFor="let item of somatorioMarcas">
-        <label> {{item.marca}}: {{item.somatorio}} veículos.</label>
-      </div>
+        <h1>Veículos por marcas:</h1>
+        <div *ngFor="let item of somatorioMarcas">
+          <label> {{item.marca}}: {{item.somatorio}} veículos.</label>
+        </div>
 
-      <h1>Veículos cadastrados na última semana:</h1>
-      <div *ngFor="let item of somatorioSemanas">
-        <label> {{item.quantidade}} veículos.</label>
-      </div>
+        <h1>Veículos cadastrados na última semana:</h1>
+        <div *ngFor="let item of somatorioSemanas">
+          <label> {{item.quantidade}} veículos.</label>
+        </div>
 
-      <h1>Veículos não vendidos:</h1>
-      <div *ngFor="let item of somatorioVendidos">
-        <label> {{item.quantidade}} veículos.</label>
-      </div>
+        <h1>Veículos não vendidos:</h1>
+        <div *ngFor="let item of somatorioVendidos">
+          <label> {{item.quantidade}} veículos.</label>
+        </div>
 
-      <button mat-raised-button color="primary" (click)="voltarParaListagem()"> Listar</button>
+        <button mat-raised-button color="primary" (click)="voltarParaListagem()"> Listar</button>
+      </mat-card-content>
     </mat-card>
   </mat-tab>
 
