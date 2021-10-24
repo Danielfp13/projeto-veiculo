@@ -27,9 +27,13 @@ import com.api.veiculo.dto.VeiculoSomatorioSemanaDTO;
 import com.api.veiculo.entity.Veiculo;
 import com.api.veiculo.service.VeiculoService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/veiculos")
 @CrossOrigin("http://localhost:4200")
+@Api ( tags  =  "Veículos Endpoints" )
 public class VeiculoController {
 	
 	@Autowired
@@ -37,6 +41,7 @@ public class VeiculoController {
 	
 	//Retorna lista de viculos
 	@GetMapping()
+	@ApiOperation ( value  =  "Listar todos os veículos " )
 	public ResponseEntity<List<Veiculo>> findAll() {
 		List<Veiculo> veiculos = veiculoService.findAll();
 		return ResponseEntity.ok().body(veiculos);
@@ -44,6 +49,7 @@ public class VeiculoController {
 	
 	// Retorna um veiculo por id
 	@GetMapping("/{id}")
+	@ApiOperation ( value  =  "Buscar veículo por id " )
 	public ResponseEntity<Veiculo> find(@PathVariable Long id) {
 		Veiculo veiculo = veiculoService.find(id);
 		return ResponseEntity.ok().body(veiculo);
@@ -51,6 +57,7 @@ public class VeiculoController {
 
 	// Adiciona um veiculo
 	@PostMapping
+	@ApiOperation ( value  =  "Cadastrar veículo" )
 	public ResponseEntity<Veiculo> insert(@Valid @RequestBody VeiculoDTO veiculoDTO) {
 		Veiculo veiculo = veiculoService.insert(veiculoDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(veiculo.getId())
@@ -60,6 +67,7 @@ public class VeiculoController {
 	
 	// Atualiza os dados de um veiculo
 	@PutMapping("/{id}")
+	@ApiOperation ( value  =  "Editar veículo" )
 	public ResponseEntity<Void> update(@Valid @RequestBody VeiculoDTO veiculoDTO, @PathVariable Long id) {
 		veiculoService.update(veiculoDTO, id);
 		return ResponseEntity.noContent().build();
@@ -67,6 +75,7 @@ public class VeiculoController {
 	
 	// Excluir a veiculo
 	@DeleteMapping("/{id}")
+	@ApiOperation ( value  =  "Excluir veículo" )
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		veiculoService.delete(id);
 		return ResponseEntity.noContent().build();
@@ -74,6 +83,7 @@ public class VeiculoController {
 	
 	// Somatório de veiculos por décadas
 	@GetMapping("/decadas")
+	@ApiOperation ( value  =  "Somatório de veículo por década" )
 	public ResponseEntity<List<VeiculoSomatorioDecadaDTO>> countVeiculo() {
 		List<VeiculoSomatorioDecadaDTO> veiculosDTO = veiculoService.countVeiculo();
 		return ResponseEntity.ok().body(veiculosDTO);
@@ -81,13 +91,15 @@ public class VeiculoController {
 	
 	// Somatório de veiculos por marca
 	@GetMapping("/marcas")
+	@ApiOperation ( value  =  "Somatório de veículos por marca" )
 	public ResponseEntity<List<VeiculoSomatorioMarcaDTO>> countMarca() {
 		List<VeiculoSomatorioMarcaDTO> veiculosDTO = veiculoService.countMarca();
 		return ResponseEntity.ok().body(veiculosDTO);
 	}
 	
-	//Retorna somatorio da semana
+	//Retorna somatorio da ultima semana
 	@GetMapping("/semanas")
+	@ApiOperation ( value  =  "Somatório de veículo cadastrados na ultima semana" )
 	public ResponseEntity<List<VeiculoSomatorioSemanaDTO>> countSemana(){
 		List<VeiculoSomatorioSemanaDTO> veiculosDTO = veiculoService.countSemana();
 		return ResponseEntity.ok().body(veiculosDTO);
@@ -95,6 +107,7 @@ public class VeiculoController {
 	
 	//Retorna somatorio de veiculos não vendidos
 	@GetMapping("/vendidos")
+	@ApiOperation ( value  =  "Somatório de veículo cadastrados na ultima semana" )
 	public ResponseEntity<List<VeiculoSomatorioSemanaDTO>> countNaoVendidos(){
 		List<VeiculoSomatorioSemanaDTO> veiculosDTO = veiculoService.countNaoVendidos();
 		return ResponseEntity.ok().body(veiculosDTO);
@@ -102,6 +115,7 @@ public class VeiculoController {
 	
 	//Retorna pagina de veiculos
 	@GetMapping("/find")
+	@ApiOperation ( value  =  "Busca páginada de veículos com ou sem parâmetros" )
 	public ResponseEntity<Page<Veiculo>> finddPage(
 			@RequestParam(value = "ultimaSemana", defaultValue = "false") Boolean ultimaSemana,
 			@RequestParam(value = "marca", defaultValue = "") String marca,
