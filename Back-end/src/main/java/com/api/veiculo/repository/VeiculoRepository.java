@@ -29,7 +29,13 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	@Query("SELECT NEW com.api.veiculo.dto.VeiculoSomatorioSemanaDTO( COUNT(obj.id) ) FROM Veiculo AS obj WHERE obj.vendido  = false")
 	public List<VeiculoSomatorioSemanaDTO> somatorioNaoVendido();
 
-	@Query(value = "select * from veiculo v where v.marca like :marca or CAST(id AS TEXT) LIKE :id", nativeQuery = true)
+	@Query(value = "select * from veiculo v where v.marca ILIKE :marca or CAST(id AS TEXT) ILIKE :id", nativeQuery = true)
 	public Page<Veiculo> findByIdOrMarcaIgnoreCase(Pageable pageRequest, String id, String marca);
+	
+	@Query(value = "select * from veiculo v where v.created >= :data", nativeQuery = true)
+	public Page<Veiculo> findUltimaSemana(Pageable pageRequest, LocalDateTime data);
+	
+	@Query(value = "select * from veiculo v where( v.marca ILIKE :marca OR CAST(id AS TEXT) ILIKE :id) and (v.created >= :data)", nativeQuery = true)
+	public Page<Veiculo> findByIdOrMarcaAndDataIgnoreCase(Pageable pageRequest, String id, String marca, LocalDateTime data);
 
 }

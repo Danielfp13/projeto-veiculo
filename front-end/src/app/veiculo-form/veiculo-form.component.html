@@ -1,0 +1,123 @@
+<mat-toolbar> Veículos</mat-toolbar>
+
+<mat-tab-group>
+
+
+  <mat-tab label="{{ veiculo.id ? 'Edição' : 'Cadastro' }}">
+
+    <mat-card class="half-width">
+      <mat-card-title>
+        <mat-icon><span class="material-icons">
+            airplanemode_active
+          </span></mat-icon>
+        Novo veículo
+      </mat-card-title>
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <mat-form-field class="half-width">
+          <mat-label>Nome do veículo</mat-label>
+          <input matInput required placeholder="Nome do Veiculo" name="veiculo" formControlName="veiculo" />
+        </mat-form-field>
+        <div *ngIf="formulario.controls.veiculo.errors && formulario.controls.veiculo.touched" class="erro">
+          <div *ngIf="formulario.controls.veiculo.getError('required')">
+            Campo veículo é obrigatório.
+          </div>
+        </div>
+
+        <mat-form-field class="half-width">
+          <mat-label>Marca do veículo</mat-label>
+          <select matNativeControl required name="marca" formControlName="marca">
+            <option value="Fiat">Fiat</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Renault">Renault</option>
+            <option value="Volkswagen">Volkswagem</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Ford">Ford</option>
+
+          </select>
+        </mat-form-field>
+
+        <div *ngIf="formulario.controls.marca.errors && formulario.controls.marca.touched" class="erro">
+          <div *ngIf="formulario.controls.marca.getError('required')">
+            Campo marca é obrigatório.
+          </div>
+        </div>
+
+        <mat-form-field class="half-width">
+          <mat-label>Ano do veículo</mat-label>
+          <input matInput type="number" required placeholder="Ano do veículo" name="ano" formControlName="ano" />
+        </mat-form-field>
+
+        <div *ngIf="formulario.controls.ano.errors && formulario.controls.ano.touched" class="erro">
+          <div *ngIf="formulario.controls.ano.getError('required')">
+            Campo ano é obrigatório.
+          </div>
+          <div *ngIf="formulario.controls.ano.getError('min')">
+            Campo ano deve ser positivo.
+          </div>
+          <div *ngIf="formulario.controls.ano.getError('max')">
+            Campo ano deve ter 4 dígitos.
+          </div>
+        </div>
+
+        <mat-form-field class="half-width">
+          <mat-label>Vendido</mat-label>
+          <select matNativeControl required name="vendido" formControlName="vendido">
+            <option value="true">Sim</option>
+            <option value="false">Não</option>
+          </select>
+        </mat-form-field>
+        <div *ngIf="formulario.controls.vendido.errors && formulario.controls.vendido.touched" class="erro">
+          <div *ngIf="formulario.controls.vendido.getError('required')">
+            Campo vendido é obrigatório.
+          </div>
+        </div>
+
+        <mat-form-field class="half-width">
+          <mat-label>Descrição do veículo</mat-label>
+          <input type="text" matInput placeholder="Descrição do veículo" name="descricao" formControlName="descricao" />
+        </mat-form-field>
+
+
+        <button [disabled]="!formulario.valid" mat-raised-button color="primary" class="half-width"
+          *ngIf="!veiculo.id">Adicionar</button>
+        <button [disabled]="!formulario.valid" mat-raised-button color="primary" class="half-width"
+          *ngIf="veiculo.id">Atualizar</button>
+        <button mat-raised-button color="primary" class="half-width" (click)="voltarParaListagem()"> Listar</button>
+
+
+      </form>
+    </mat-card>
+  </mat-tab>
+
+
+  <mat-tab label="Relatórios">
+    <mat-card>
+      <mat-card-title>
+        Relatórios
+      </mat-card-title>
+      <h1>Veículos por décadas:</h1>
+      <div *ngFor="let item of somatorioDecadas">
+        <label>Década de {{item.decada}}: {{item.quantidade}} veículos.</label>
+      </div>
+
+      <h1>Veículos por marcas:</h1>
+      <div *ngFor="let item of somatorioMarcas">
+        <label> {{item.marca}}: {{item.somatorio}} veículos.</label>
+      </div>
+
+      <h1>Veículos cadastrados na última semana:</h1>
+      <div *ngFor="let item of somatorioSemanas">
+        <label> {{item.quantidade}} veículos.</label>
+      </div>
+
+      <h1>Veículos não vendidos:</h1>
+      <div *ngFor="let item of somatorioVendidos">
+        <label> {{item.quantidade}} veículos.</label>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="voltarParaListagem()"> Listar</button>
+    </mat-card>
+  </mat-tab>
+
+</mat-tab-group>

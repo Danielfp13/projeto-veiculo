@@ -1,0 +1,94 @@
+<mat-toolbar> Veículos</mat-toolbar>
+
+<mat-tab-group>
+  <mat-tab label="Todos">
+
+    <mat-card>
+      <mat-card-title>
+        <mat-icon><span class="material-icons">
+            airplanemode_active
+          </span></mat-icon>
+        Todos os veículos
+      </mat-card-title>
+      <form>
+        <button mat-raised-button color="primary" (click)="novoCadastro()" class="botaoCadastro">Cadastro/ Relatório
+        </button>
+
+        <div class="radio">
+          <label>Buscar cadastrados na última semana: </label>
+          <mat-radio-group [(ngModel)]="semana" name="semana">
+            <mat-radio-button class="example-radio-button" *ngFor="let opcao of opcoes" [value]="opcao">
+              <label>{{opcao? 'sim' : 'não'}}</label>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+        <mat-form-field class="search">
+          <mat-label class="fonte">Busca por marca ou id</mat-label>
+          <input matInput type="text" placeholder="Busca por marca ou id" name="busca" [(ngModel)]="busca" />
+          <button mat-raised-button color="primary" (click)="buscar()" class="botaoBusca">Busca</button>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="veiculos" class="table-width">
+
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let veiculo"> {{ veiculo.id }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="veiculo">
+            <th mat-header-cell *matHeaderCellDef> Veículo </th>
+            <td mat-cell *matCellDef="let veiculo"> {{ veiculo.veiculo }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef> Marca </th>
+            <td mat-cell *matCellDef="let veiculo"> {{ veiculo.marca }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ano">
+            <th mat-header-cell *matHeaderCellDef> Ano </th>
+            <td mat-cell *matCellDef="let veiculo"> {{ veiculo.ano}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef> Descrição </th>
+            <td mat-cell *matCellDef="let veiculo"> {{ veiculo.descricao }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vendido">
+            <th mat-header-cell *matHeaderCellDef> Vendido </th>
+            <td mat-cell *matCellDef="let veiculo"> {{veiculo.vendido ? 'sim' : 'não'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="alterar">
+            <th mat-header-cell *matHeaderCellDef> Alterar</th>
+            <td mat-cell *matCellDef="let veiculo">
+              <button mat-raised-button color="primary" routerLink="/form/{{ veiculo.id }}" class="botao">
+                <span class="material-icons">
+                  edit
+                </span>
+              </button>
+
+              <button mat-raised-button color="warn" (click)="openDialog(veiculo)" class="botao">
+                <span class="material-icons">
+                  delete
+                </span>
+              </button>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+        </table>
+        <mat-paginator [length]="totalElementos" [pageSize]="linePerPage" [pageSizeOptions]="pageSizeOptions"
+          (page)="paginar($event)">
+        </mat-paginator>
+      </form>
+    </mat-card>
+
+  </mat-tab>
+</mat-tab-group>

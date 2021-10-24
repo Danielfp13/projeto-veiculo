@@ -84,14 +84,24 @@ public class VeiculoService {
 	}
 
 	// pagina de veiculos
-	public Page<Veiculo> findPage(Integer page, Integer linePerPage, String direction, String orderBy, String id,String marca) {
+	public Page<Veiculo> findPage(Boolean ultimaSenama ,Integer page, Integer linePerPage, String direction, String orderBy, String id,String marca) {
 		PageRequest pageRequest = PageRequest.of(page, linePerPage, Direction.valueOf(direction), orderBy);
 
-		if (id.isEmpty() && marca.isEmpty()) {
-			return veiculoRepository.findAll(pageRequest);
-		} else {
-			return veiculoRepository.findByIdOrMarcaIgnoreCase(pageRequest, id, marca);
+		if(ultimaSenama) {
+			if (id.isEmpty() && marca.isEmpty()) {
+				return veiculoRepository.findUltimaSemana(pageRequest, LocalDateTime.now().minusWeeks(1));
+			}
+			else {
+				return veiculoRepository.findByIdOrMarcaAndDataIgnoreCase(pageRequest,id, marca, LocalDateTime.now().minusWeeks(1));
+			}
+		}else {
+			if (id.isEmpty() && marca.isEmpty()) {
+				return veiculoRepository.findAll(pageRequest);
+			} else {
+				return veiculoRepository.findByIdOrMarcaIgnoreCase(pageRequest, id, marca);
+			}
 		}
+		
 
 	}
 }

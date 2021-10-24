@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import com.api.veiculo.service.VeiculoService;
 
 @RestController
 @RequestMapping("/veiculos")
+@CrossOrigin("http://localhost:4200")
 public class VeiculoController {
 	
 	@Autowired
@@ -101,6 +103,7 @@ public class VeiculoController {
 	//Retorna pagina de veiculos
 	@GetMapping("/find")
 	public ResponseEntity<Page<Veiculo>> finddPage(
+			@RequestParam(value = "ultimaSemana", defaultValue = "false") Boolean ultimaSemana,
 			@RequestParam(value = "marca", defaultValue = "") String marca,
      		@RequestParam(value = "id", defaultValue = "") String id,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -108,7 +111,7 @@ public class VeiculoController {
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "ordeBy", defaultValue = "marca") String orderBy
 			){
-				Page<Veiculo> veiculos = veiculoService.findPage(page, linePerPage, direction, orderBy, id, marca);
+				Page<Veiculo> veiculos = veiculoService.findPage(ultimaSemana ,page, linePerPage, direction, orderBy, id, marca);
 		return ResponseEntity.ok().body(veiculos);
 	}
 		
