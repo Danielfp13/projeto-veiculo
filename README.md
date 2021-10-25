@@ -51,7 +51,7 @@ https://github.com/Danielfp13/projeto-veiculo/tree/main/Collection-para-teste-no
 
 ## Criar banco de dados aeronave
 
- criar tabela aeronave
+ criar tabela veiculo 
  https://github.com/Danielfp13/projeto-veiculo/tree/main/Banco-Dados
  
 ## Back end
