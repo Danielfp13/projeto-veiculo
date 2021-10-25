@@ -1,10 +1,8 @@
-package com.api.veiculo.service.exception;
+package com.api.veiculo.controller.exception;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.api.veiculo.controller.exception.FieldMessage;
 
 public class ValidationError extends StandardError {
 

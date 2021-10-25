@@ -106,6 +106,35 @@
 			"response": []
 		},
 		{
+			"name": "Alterar marca do veiculo",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "mudado",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/veiculos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"veiculos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Deletar veiculo por id",
 			"request": {
 				"method": "DELETE",

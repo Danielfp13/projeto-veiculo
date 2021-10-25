@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.api.veiculo.dto.VeiculoSomatorioDecadaDTO;
@@ -37,5 +39,9 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	
 	@Query(value = "select * from veiculo v where( v.marca ILIKE :marca OR CAST(id AS TEXT) ILIKE :id) and (v.created >= :data)", nativeQuery = true)
 	public Page<Veiculo> findByIdOrMarcaAndDataIgnoreCase(Pageable pageRequest, String id, String marca, LocalDateTime data);
+	
+	@Modifying
+	@Query(value = "UPDATE veiculo  SET veiculo = :nomeVeiculo where id = :id", nativeQuery = true )
+	void alterVeiculo(@Param("nomeVeiculo")String nomeVeiculo, @Param("id") Long id);
 
 }

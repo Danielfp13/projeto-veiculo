@@ -1,4 +1,4 @@
-package com.api.veiculo.service.exception;
+package com.api.veiculo.controller.exception;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

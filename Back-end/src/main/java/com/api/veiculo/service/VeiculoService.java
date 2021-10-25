@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.veiculo.dto.VeiculoDTO;
 import com.api.veiculo.dto.VeiculoSomatorioDecadaDTO;
@@ -102,6 +103,11 @@ public class VeiculoService {
 			}
 		}
 		
-
+	}
+	
+	//Alterar nome do veiculo
+	@Transactional
+	public void alterVeiculo(String nomeVeiculo, Long id) {
+	veiculoRepository.alterVeiculo(nomeVeiculo, id);
 	}
 }
