@@ -1,5 +1,5 @@
 # Sobre o projeto
-Esse projeto foi um teste proposto pela TINNOVA, ele consiste em uma lista de execícios que foram feito em java, e uma api que faça o crud de veiculo, pesquisa por mais de um campo e relatórios, o back-end foi desenvolvido em java com Spring Boot, e no front-ent foi utilizado o angular 11 com angular material.
+Esse projeto foi um teste proposto pela TINNOVA, ele consiste em uma lista de execícios que foram feito em java, e uma api que faça o crud de veiculo, pesquisa por mais de um campo e relatórios, o back-end foi desenvolvido em java com Spring Boot, o front-end em modo SPA para consumir essa api foi desenvlvido com angular 11 e angular material.
 
 # Layout web
 ## Cadastro
