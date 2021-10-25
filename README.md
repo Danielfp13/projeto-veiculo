@@ -1,11 +1,12 @@
 # Sobre o projeto
-Projeto Veiculos foi um teste proposto pela TINNOVA, ele consiste em construir uma api que faça o crud de veiculo, pesquisa por mais de um campo e relatório, no back-end foi desenvolvido uma API com Spring Boot, e no front-ent foi utilizado o angular 11 com angular material.
+Esse projeto foi um teste proposto pela TINNOVA, ele consiste em uma lista de execícios que foram feito em java, e uma api que faça o crud de veiculo, pesquisa por mais de um campo e relatórios, o back-end foi desenvolvido em java com Spring Boot, e no front-ent foi utilizado o angular 11 com angular material.
 
-## Layout web
+# Layout web
+## Cadastro
 ![Web 1](https://github.com/Danielfp13/projeto-veiculo/blob/main/assents/imagens/cadastro.jpg)
-
+## Relatório
 ![Web 2](https://github.com/Danielfp13/projeto-veiculo/blob/main/assents/imagens/relatorio.jpg)
-
+## Pesquisa
 ![Web 2](https://github.com/Danielfp13/projeto-veiculo/blob/main/assents/imagens/listagem.jpg)
 
 ## Arquitetura utilizada
@@ -63,17 +64,17 @@ Pré-requisitos: Java 11
 ```
 ## Abrir back-end na IDE
 
- -Abrir STS (Spring Tool Suite) ou outra IDE
+ - Abrir STS (Spring Tool Suite) ou outra IDE
  vá em  file -> import -> existing maven projects >next
- -Escolha a pasta back-end-> finish
+ - Escolha a pasta back-end-> finish
  
 ## Configurar banco de dados
 
 #na pasta src/main/resources
 modifique o arquivo application-dev.properties com as configurações do seu banco de dados
--spring.datasource.url=jdbc:postgresql://localhost:5432/db-veiculo
--spring.datasource.username=postgres
--spring.datasource.password=123
+- spring.datasource.url=jdbc:postgresql://localhost:5432/db-veiculo
+- spring.datasource.username=postgres
+- spring.datasource.password=123
 
 # Executar o projeto
 Clique com o botão direito do mouse no projeto-> Run as -> Spring Boot App.
